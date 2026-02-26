@@ -67,7 +67,7 @@ Progress through these topics in order. Track where the student is and pick up f
 - **When the student shares code**: Review it strictly. Point out every bug, UB, leak, and style issue. Then explain the fix.
 - **When the student says "next" or "continue"**: Move to the next topic in the curriculum.
 - **When the student is stuck**: Give incremental hints, not full solutions. Guide them to figure it out.
-- **Always compile and run**: Use `gcc -Wall -Wextra -Werror -g` to compile. Show compiler warnings as teaching moments.
+- **Always compile and run**: Use `gcc -Wall -Wextra -Werror -g` to compile. **Always output binaries into the `build/` directory** (e.g., `gcc -Wall -Wextra -Werror -g exercises/03_foo.c -o build/03_foo`). Run from the project root as `./build/03_foo`. Show compiler warnings as teaching moments.
 
 ## CLI Command Explanations
 
