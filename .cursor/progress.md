@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase**: Phase 1 — Foundations
-- **Current Topic**: Variables, constants, #define vs const
+- **Current Topic**: Operators and expressions (including bitwise)
 - **Last Session**: 2026-02-27
 
 ## Completed Topics
@@ -11,6 +11,7 @@
 | 1 | Compilation model (preprocessor → compiler → assembler → linker) vs JS JIT | 2026-02-26 | Walked through all 4 stages with real output: -E, -S, -c, linking. Compared to V8 JIT pipeline. |
 | 2 | Types: int, char, float, double, long, unsigned, sizeof | 2026-02-26 | Sizes, ranges, format specifiers, char as int, float precision, limits.h, sizeof. Overflow exercise completed. |
 | 3 | Variables, constants, #define vs const | 2026-02-27 | Covered storage duration (auto/static/global), scope, #define vs const vs enum tradeoffs, preprocessor macro dangers, uninitialized variable UB. |
+| 4 | Operators and expressions (including bitwise) | 2026-02-27 | Integer division truncation, integer promotions, signed/unsigned comparison trap, sequence points & UB, bitwise operators (& | ^ ~ << >>), bit manipulation patterns, operator precedence gotcha. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -18,14 +19,20 @@
 | 1 | Explore the Build Pipeline | exercises/01_build_pipeline.c | completed | Passed. Ran all 4 stages. Minor style issue: space between # and directive. Didn't use -Wall -Wextra -Werror flags initially. |
 | 2 | Type Overflow Explorer | exercises/02_overflow.c | completed | All 4 cases correct. Correctly identified UB vs defined wrapping. Explored all 4 build stages again with new code. Hit linker EISDIR error (tried -o build when build/ was a directory). |
 | 3 | Constants & Variable Lifetime | exercises/03_constants_exercise.c | completed | All logic correct. SQUARE macro properly parenthesized, static next_id works, enum array sizing correct, block scoping demonstrated. Minor issues: typo in output, unused const, UPPER_CASE naming on a const variable (should be snake_case). |
+| 4 | Bitwise Permissions | exercises/04_bitwise_permissions.c | completed | All logic correct after fixing 4 bugs: unsigned loop var infinite loop, ignored return values (pass-by-value), XOR vs AND-NOT for clear, reversed print order. Fixed all on first attempt after review. |
 
 ## Mistakes & Weak Areas
+- 2026-02-27: Used `unsigned char` as loop variable in a `>= 0` condition — unsigned types can never be negative, causing infinite loop. Understood wrapping behavior after explanation.
+- 2026-02-27: Ignored return values from functions expecting pass-by-value pattern. Forgot that C functions get copies of arguments. Fixed by capturing return values.
+- 2026-02-27: Used XOR (`^`) instead of AND-NOT (`& ~`) for clearing a bit. XOR toggles, AND-NOT clears unconditionally. Corrected after explanation.
 - 2026-02-26: Used `# include` / `# define` with space after `#`. Technically valid but non-standard style. Clarified convention is `#include` / `#define`.
 - 2026-02-26: Compiled without `-Wall -Wextra -Werror` flags. Explained that compiler flags are the C equivalent of a linter.
 - 2026-02-27: Used UPPER_SNAKE_CASE for a `const` variable (`EGGS`). In C convention, UPPER_CASE is for macros and enum constants; `const` vars should be snake_case since they're still variables (with addresses), not true compile-time constants.
 
 ## Areas to Revisit
 - [ ] Always use `-Wall -Wextra -Werror -g` when compiling
+- [ ] Never use unsigned types for loop variables that count down to 0
+- [ ] Remember C is pass-by-value — capture return values or use pointers
 
 ## Session Log
 ### 2026-02-26
