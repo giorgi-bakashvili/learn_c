@@ -2,6 +2,26 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "clean",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "build"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "create build directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "build"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "build",
             "type": "shell",
             "command": "gcc",
@@ -12,8 +32,21 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/build/${fileBasenameNoExtension}",
+                "build/${fileBasenameNoExtension}",
             ],
+            "dependsOn": [
+                "clean",
+                "create build directory"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "build/${fileBasenameNoExtension}",
+            "dependsOn": "build",
+            "dependsOrder": "sequence",
             "problemMatcher": []
         }
     ]

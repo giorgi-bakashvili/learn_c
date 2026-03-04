@@ -1,8 +1,7 @@
-
 #include <stdio.h>
 
 int main(void) {
-    char* text = "Hello, World! 123 ... zzzzz OK?";
+    const char *text = "Hello, World! 123 ... zzzzz OK?";
     int vowels = 0;
     int digits = 0;
     int spaces = 0;
@@ -71,6 +70,13 @@ int main(void) {
     printf("Spaces: %d\n", spaces);
     printf("Other: %d\n", other);
     printf("Longest run: %d x %c\n", max_run, max_char);
+
+    int while_loop = 1;
+
+    do {
+        printf("do scope test\n");
+        while_loop = 0;
+    } while (while_loop);
 
     return 0;
 }

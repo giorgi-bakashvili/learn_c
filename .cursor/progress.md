@@ -2,8 +2,8 @@
 
 ## Current Position
 - **Phase**: Phase 1 — Foundations
-- **Current Topic**: Control flow: if, switch, for, while, do-while, goto
-- **Last Session**: 2026-03-01
+- **Current Topic**: Functions, prototypes, header files
+- **Last Session**: 2026-03-04
 
 ## Completed Topics
 | # | Topic | Date | Notes |
@@ -12,6 +12,7 @@
 | 2 | Types: int, char, float, double, long, unsigned, sizeof | 2026-02-26 | Sizes, ranges, format specifiers, char as int, float precision, limits.h, sizeof. Overflow exercise completed. |
 | 3 | Variables, constants, #define vs const | 2026-02-27 | Covered storage duration (auto/static/global), scope, #define vs const vs enum tradeoffs, preprocessor macro dangers, uninitialized variable UB. |
 | 4 | Operators and expressions (including bitwise) | 2026-02-27 | Integer division truncation, integer promotions, signed/unsigned comparison trap, sequence points & UB, bitwise operators (& | ^ ~ << >>), bit manipulation patterns, operator precedence gotcha. |
+| 5 | Control flow: if, switch, for, while, do-while, goto | 2026-03-04 | if truthiness, switch fallthrough/grouping, for C99 scoping, do-while, break/continue (no labels), goto cleanup pattern. Exercise completed with all fixes applied. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -20,7 +21,7 @@
 | 2 | Type Overflow Explorer | exercises/02_overflow.c | completed | All 4 cases correct. Correctly identified UB vs defined wrapping. Explored all 4 build stages again with new code. Hit linker EISDIR error (tried -o build when build/ was a directory). |
 | 3 | Constants & Variable Lifetime | exercises/03_constants_exercise.c | completed | All logic correct. SQUARE macro properly parenthesized, static next_id works, enum array sizing correct, block scoping demonstrated. Minor issues: typo in output, unused const, UPPER_CASE naming on a const variable (should be snake_case). |
 | 4 | Bitwise Permissions | exercises/04_bitwise_permissions.c | completed | All logic correct after fixing 4 bugs: unsigned loop var infinite loop, ignored return values (pass-by-value), XOR vs AND-NOT for clear, reversed print order. Fixed all on first attempt after review. |
-| 5 | Text Analyzer | exercises/05_text_analyzer.c | review | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. Core logic all correct. Issues: char* instead of const char*, missing do-while, output format mismatch, * placement style. |
+| 5 | Text Analyzer | exercises/05_text_analyzer.c | completed | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. All review issues fixed: const char *, * placement, do-while added. Clean compile, correct output. |
 
 ## Mistakes & Weak Areas
 - 2026-02-27: Used `unsigned char` as loop variable in a `>= 0` condition — unsigned types can never be negative, causing infinite loop. Understood wrapping behavior after explanation.
@@ -57,4 +58,9 @@
 ### 2026-03-01
 - Covered: Control flow — if (truthiness, assignment trap), switch (integer-only, fallthrough, grouping, __attribute__((fallthrough))), for (C99 scoping, infinite loop idiom), while, do-while (macro wrapper pattern), break/continue (no labels in C), goto (cleanup pattern from Linux kernel)
 - Exercises: "Text Analyzer" — assigned
+- Key takeaways: Understood all control flow constructs. Switch fallthrough grouping for vowels. Longest-run tracking pattern.
+
+### 2026-03-04
+- Covered: Text Analyzer review (approved), Functions / prototypes / header files
+- Exercises: TBD
 - Key takeaways: Teaching in progress
