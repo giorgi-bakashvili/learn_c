@@ -22,6 +22,7 @@
 | 3 | Constants & Variable Lifetime | exercises/03_constants_exercise.c | completed | All logic correct. SQUARE macro properly parenthesized, static next_id works, enum array sizing correct, block scoping demonstrated. Minor issues: typo in output, unused const, UPPER_CASE naming on a const variable (should be snake_case). |
 | 4 | Bitwise Permissions | exercises/04_bitwise_permissions.c | completed | All logic correct after fixing 4 bugs: unsigned loop var infinite loop, ignored return values (pass-by-value), XOR vs AND-NOT for clear, reversed print order. Fixed all on first attempt after review. |
 | 5 | Text Analyzer | exercises/05_text_analyzer.c | completed | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. All review issues fixed: const char *, * placement, do-while added. Clean compile, correct output. |
+| 6 | Multi-File Calculator | exercises/06_calc.h, 06_calc.c, 06_main.c | completed | Header guard, prototypes, multi-file compilation, static function, divide-by-zero guard. Needed help with: trailing }; (JS habit), power off-by-one (result=base not 1), abs_value logic confusion (caused by ambiguous exercise spec), negative exponent early return. |
 
 ## Mistakes & Weak Areas
 - 2026-02-27: Used `unsigned char` as loop variable in a `>= 0` condition — unsigned types can never be negative, causing infinite loop. Understood wrapping behavior after explanation.
@@ -30,6 +31,8 @@
 - 2026-02-26: Used `# include` / `# define` with space after `#`. Technically valid but non-standard style. Clarified convention is `#include` / `#define`.
 - 2026-02-26: Compiled without `-Wall -Wextra -Werror` flags. Explained that compiler flags are the C equivalent of a linter.
 - 2026-02-27: Used UPPER_SNAKE_CASE for a `const` variable (`EGGS`). In C convention, UPPER_CASE is for macros and enum constants; `const` vars should be snake_case since they're still variables (with addresses), not true compile-time constants.
+- 2026-03-04: Trailing `};` after function bodies — JS habit from `const fn = () => { ... };`. In C, function definitions end with `}` only.
+- 2026-03-04: Initialized `result = base` instead of `result = 1` in power loop — off-by-one multiplication. Pattern: accumulator loops should start at the identity element (1 for multiplication, 0 for addition).
 
 ## Areas to Revisit
 - [ ] Always use `-Wall -Wextra -Werror -g` when compiling
@@ -62,5 +65,5 @@
 
 ### 2026-03-04
 - Covered: Text Analyzer review (approved), Functions / prototypes / header files
-- Exercises: TBD
-- Key takeaways: Teaching in progress
+- Exercises: "Multi-File Calculator" — completed with assistance on power function
+- Key takeaways: Header guards, prototypes, `#include ""` vs `<>`, multi-file compilation, `static` functions for file-scoped visibility. JS habit of `};` after functions flagged. Accumulator pattern (start at identity element) needs reinforcement.
