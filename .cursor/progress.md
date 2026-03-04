@@ -2,8 +2,8 @@
 
 ## Current Position
 - **Phase**: Phase 1 — Foundations
-- **Current Topic**: Operators and expressions (including bitwise)
-- **Last Session**: 2026-02-27
+- **Current Topic**: Control flow: if, switch, for, while, do-while, goto
+- **Last Session**: 2026-03-01
 
 ## Completed Topics
 | # | Topic | Date | Notes |
@@ -20,6 +20,7 @@
 | 2 | Type Overflow Explorer | exercises/02_overflow.c | completed | All 4 cases correct. Correctly identified UB vs defined wrapping. Explored all 4 build stages again with new code. Hit linker EISDIR error (tried -o build when build/ was a directory). |
 | 3 | Constants & Variable Lifetime | exercises/03_constants_exercise.c | completed | All logic correct. SQUARE macro properly parenthesized, static next_id works, enum array sizing correct, block scoping demonstrated. Minor issues: typo in output, unused const, UPPER_CASE naming on a const variable (should be snake_case). |
 | 4 | Bitwise Permissions | exercises/04_bitwise_permissions.c | completed | All logic correct after fixing 4 bugs: unsigned loop var infinite loop, ignored return values (pass-by-value), XOR vs AND-NOT for clear, reversed print order. Fixed all on first attempt after review. |
+| 5 | Text Analyzer | exercises/05_text_analyzer.c | review | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. Core logic all correct. Issues: char* instead of const char*, missing do-while, output format mismatch, * placement style. |
 
 ## Mistakes & Weak Areas
 - 2026-02-27: Used `unsigned char` as loop variable in a `>= 0` condition — unsigned types can never be negative, causing infinite loop. Understood wrapping behavior after explanation.
@@ -33,6 +34,8 @@
 - [ ] Always use `-Wall -Wextra -Werror -g` when compiling
 - [ ] Never use unsigned types for loop variables that count down to 0
 - [ ] Remember C is pass-by-value — capture return values or use pointers
+- [ ] Always use `const char *` for string literals — they live in read-only memory
+- [ ] Put `*` with the variable name in C: `char *p` not `char* p`
 
 ## Session Log
 ### 2026-02-26
@@ -50,3 +53,8 @@
 - Exercises: "Constants & Variable Lifetime" — assigned
 - Key takeaways: const in C is NOT a compile-time constant (unlike JS const), enum gives true compile-time int constants, -Wuninitialized catches reading garbage
 - Exercise completed: All logic correct on first attempt. Macro parenthesization, static locals, enum sizing all understood. Style note: const vars use snake_case, not UPPER_CASE.
+
+### 2026-03-01
+- Covered: Control flow — if (truthiness, assignment trap), switch (integer-only, fallthrough, grouping, __attribute__((fallthrough))), for (C99 scoping, infinite loop idiom), while, do-while (macro wrapper pattern), break/continue (no labels in C), goto (cleanup pattern from Linux kernel)
+- Exercises: "Text Analyzer" — assigned
+- Key takeaways: Teaching in progress
