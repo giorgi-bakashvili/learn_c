@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase**: Phase 1 — Foundations
-- **Current Topic**: Functions, prototypes, header files
+- **Current Topic**: Arrays (stack-allocated, fixed-size)
 - **Last Session**: 2026-03-04
 
 ## Completed Topics
@@ -23,8 +23,13 @@
 | 4 | Bitwise Permissions | exercises/04_bitwise_permissions.c | completed | All logic correct after fixing 4 bugs: unsigned loop var infinite loop, ignored return values (pass-by-value), XOR vs AND-NOT for clear, reversed print order. Fixed all on first attempt after review. |
 | 5 | Text Analyzer | exercises/05_text_analyzer.c | completed | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. All review issues fixed: const char *, * placement, do-while added. Clean compile, correct output. |
 | 6 | Multi-File Calculator | exercises/06_calc.h, 06_calc.c, 06_main.c | completed | Header guard, prototypes, multi-file compilation, static function, divide-by-zero guard. Needed help with: trailing }; (JS habit), power off-by-one (result=base not 1), abs_value logic confusion (caused by ambiguous exercise spec), negative exponent early return. |
+| 7 | Grade Statistics | exercises/07_grade_stats.c | completed | Arrays exercise: find_min, find_max, compute_average, count_above, curve_grades. Core logic correct. Skipped fixes (understood): global→local array, size==0 guard, cap at 100, float-to-int implicit conversion. |
 
 ## Mistakes & Weak Areas
+- 2026-03-04: Used global array instead of local — same principle as avoiding globals in JS. Prefer local variables passed to functions.
+- 2026-03-04: Missing edge case guard for size==0 in find_min/find_max — accessing grades[0] with empty array is UB.
+- 2026-03-04: Missing cap at 100 in curve_grades — spec required clamping, worked by coincidence with test data.
+- 2026-03-04: Implicit float-to-int conversion when passing compute_average() result to count_above(int threshold) — silent truncation.
 - 2026-02-27: Used `unsigned char` as loop variable in a `>= 0` condition — unsigned types can never be negative, causing infinite loop. Understood wrapping behavior after explanation.
 - 2026-02-27: Ignored return values from functions expecting pass-by-value pattern. Forgot that C functions get copies of arguments. Fixed by capturing return values.
 - 2026-02-27: Used XOR (`^`) instead of AND-NOT (`& ~`) for clearing a bit. XOR toggles, AND-NOT clears unconditionally. Corrected after explanation.
@@ -67,3 +72,8 @@
 - Covered: Text Analyzer review (approved), Functions / prototypes / header files
 - Exercises: "Multi-File Calculator" — completed with assistance on power function
 - Key takeaways: Header guards, prototypes, `#include ""` vs `<>`, multi-file compilation, `static` functions for file-scoped visibility. JS habit of `};` after functions flagged. Accumulator pattern (start at identity element) needs reinforcement.
+
+### 2026-03-04 (session 2)
+- Covered: Arrays — declaration, initialization, memory layout, no bounds checking, sizeof trick, array decay to pointer, passing to functions, ARRAY_LEN macro, 2D arrays row-major layout
+- Exercises: "Grade Statistics" — assigned
+- Key takeaways: Demonstrated contiguous addressing, sizeof inside vs outside function, decay equivalence (arr == &arr[0] == ptr), modification through function pointer, 2D flat memory layout. Compiler warning -Wsizeof-array-argument catches sizeof-on-parameter mistake.
