@@ -1,9 +1,9 @@
 # C Learning Progress
 
 ## Current Position
-- **Phase**: Phase 1 — Foundations
-- **Current Topic**: Strings as char[] / char* with null terminator
-- **Last Session**: 2026-03-04
+- **Phase**: Phase 2 — Pointers & Memory
+- **Current Topic**: Pointers: declaration, dereferencing, arithmetic, NULL
+- **Last Session**: 2026-03-05
 
 ## Completed Topics
 | # | Topic | Date | Notes |
@@ -28,6 +28,7 @@
 | 6 | Multi-File Calculator | exercises/06_calc.h, 06_calc.c, 06_main.c | completed | Header guard, prototypes, multi-file compilation, static function, divide-by-zero guard. Needed help with: trailing }; (JS habit), power off-by-one (result=base not 1), abs_value logic confusion (caused by ambiguous exercise spec), negative exponent early return. |
 | 7 | Grade Statistics | exercises/07_grade_stats.c | completed | Arrays exercise: find_min, find_max, compute_average, count_above, curve_grades. Core logic correct. Skipped fixes (understood): global→local array, size==0 guard, cap at 100, float-to-int implicit conversion. |
 | 8 | String Toolkit | exercises/08_string_toolkit.c | skipped | Student found it too easy, skipped exercise. Concepts understood from demo and Q&A. |
+| 9 | Pointer Explorer | exercises/09_pointer_explorer.c | skipped | Skipped exercise. Concepts understood from demo and explanation. |
 
 ## Mistakes & Weak Areas
 - 2026-03-04: Used global array instead of local — same principle as avoiding globals in JS. Prefer local variables passed to functions.
@@ -84,3 +85,8 @@
 - Covered: Strings — char[] vs char*, null terminator, string literal storage, strlen vs sizeof, strcmp (0=equal gotcha), snprintf for safe building, pointer iteration, strstr/strchr, string interning caveat
 - Exercises: "String Toolkit" — assigned
 - Key takeaways: No string type in C — just char arrays with \0 sentinel. const char* for literals. Never use gets/scanf for strings. snprintf for safe formatting.
+
+### 2026-03-05
+- Covered: Pointers — declaration, &, *, pointer sizes, NULL, pointer arithmetic (stride = sizeof(type)), pointer subtraction, array-pointer equivalence, dangerous patterns (uninitialized, dangling, out-of-bounds)
+- Exercises: "Pointer Explorer" — skipped
+- Key takeaways: Phase 2 begins. Demo showed arithmetic stride (4 bytes per int), byte-distance via char* cast, NULL as 0x0, arr[i] ≡ *(arr+i) ≡ i[arr].
