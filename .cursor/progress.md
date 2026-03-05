@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase**: Phase 1 — Foundations
-- **Current Topic**: Arrays (stack-allocated, fixed-size)
+- **Current Topic**: Strings as char[] / char* with null terminator
 - **Last Session**: 2026-03-04
 
 ## Completed Topics
@@ -13,6 +13,9 @@
 | 3 | Variables, constants, #define vs const | 2026-02-27 | Covered storage duration (auto/static/global), scope, #define vs const vs enum tradeoffs, preprocessor macro dangers, uninitialized variable UB. |
 | 4 | Operators and expressions (including bitwise) | 2026-02-27 | Integer division truncation, integer promotions, signed/unsigned comparison trap, sequence points & UB, bitwise operators (& | ^ ~ << >>), bit manipulation patterns, operator precedence gotcha. |
 | 5 | Control flow: if, switch, for, while, do-while, goto | 2026-03-04 | if truthiness, switch fallthrough/grouping, for C99 scoping, do-while, break/continue (no labels), goto cleanup pattern. Exercise completed with all fixes applied. |
+| 6 | Functions, prototypes, header files | 2026-03-04 | Header guards, prototypes, #include "" vs <>, multi-file compilation, static functions for file-scoped visibility. |
+| 7 | Arrays (stack-allocated, fixed-size) | 2026-03-04 | Declaration, initialization, memory layout, sizeof trick, ARRAY_LEN macro, array decay, passing to functions, 2D row-major. |
+| 8 | Strings as char[] / char* with null terminator | 2026-03-04 | char[] vs char*, null terminator, .rodata segment, strlen vs sizeof, strcmp, snprintf, pointer iteration. Skipped exercise (too easy). |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -24,6 +27,7 @@
 | 5 | Text Analyzer | exercises/05_text_analyzer.c | completed | Control flow exercise: for, switch fallthrough, do-while, longest run tracking. All review issues fixed: const char *, * placement, do-while added. Clean compile, correct output. |
 | 6 | Multi-File Calculator | exercises/06_calc.h, 06_calc.c, 06_main.c | completed | Header guard, prototypes, multi-file compilation, static function, divide-by-zero guard. Needed help with: trailing }; (JS habit), power off-by-one (result=base not 1), abs_value logic confusion (caused by ambiguous exercise spec), negative exponent early return. |
 | 7 | Grade Statistics | exercises/07_grade_stats.c | completed | Arrays exercise: find_min, find_max, compute_average, count_above, curve_grades. Core logic correct. Skipped fixes (understood): global→local array, size==0 guard, cap at 100, float-to-int implicit conversion. |
+| 8 | String Toolkit | exercises/08_string_toolkit.c | skipped | Student found it too easy, skipped exercise. Concepts understood from demo and Q&A. |
 
 ## Mistakes & Weak Areas
 - 2026-03-04: Used global array instead of local — same principle as avoiding globals in JS. Prefer local variables passed to functions.
@@ -75,5 +79,8 @@
 
 ### 2026-03-04 (session 2)
 - Covered: Arrays — declaration, initialization, memory layout, no bounds checking, sizeof trick, array decay to pointer, passing to functions, ARRAY_LEN macro, 2D arrays row-major layout
-- Exercises: "Grade Statistics" — assigned
+- Exercises: "Grade Statistics" — completed (skipped fixes, understood issues)
 - Key takeaways: Demonstrated contiguous addressing, sizeof inside vs outside function, decay equivalence (arr == &arr[0] == ptr), modification through function pointer, 2D flat memory layout. Compiler warning -Wsizeof-array-argument catches sizeof-on-parameter mistake.
+- Covered: Strings — char[] vs char*, null terminator, string literal storage, strlen vs sizeof, strcmp (0=equal gotcha), snprintf for safe building, pointer iteration, strstr/strchr, string interning caveat
+- Exercises: "String Toolkit" — assigned
+- Key takeaways: No string type in C — just char arrays with \0 sentinel. const char* for literals. Never use gets/scanf for strings. snprintf for safe formatting.
