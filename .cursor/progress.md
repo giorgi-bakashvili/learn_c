@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase**: Phase 2 — Pointers & Memory
-- **Current Topic**: Pointers: declaration, dereferencing, arithmetic, NULL
+- **Current Topic**: Pass-by-value vs pass-by-pointer
 - **Last Session**: 2026-03-05
 
 ## Completed Topics
@@ -16,6 +16,7 @@
 | 6 | Functions, prototypes, header files | 2026-03-04 | Header guards, prototypes, #include "" vs <>, multi-file compilation, static functions for file-scoped visibility. |
 | 7 | Arrays (stack-allocated, fixed-size) | 2026-03-04 | Declaration, initialization, memory layout, sizeof trick, ARRAY_LEN macro, array decay, passing to functions, 2D row-major. |
 | 8 | Strings as char[] / char* with null terminator | 2026-03-04 | char[] vs char*, null terminator, .rodata segment, strlen vs sizeof, strcmp, snprintf, pointer iteration. Skipped exercise (too easy). |
+| 9 | Pass-by-value vs pass-by-pointer | 2026-03-05 | Copy trap demo, address proof, swap pattern, out-parameters, array decay recap. Skipped exercise. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -29,6 +30,7 @@
 | 7 | Grade Statistics | exercises/07_grade_stats.c | completed | Arrays exercise: find_min, find_max, compute_average, count_above, curve_grades. Core logic correct. Skipped fixes (understood): global→local array, size==0 guard, cap at 100, float-to-int implicit conversion. |
 | 8 | String Toolkit | exercises/08_string_toolkit.c | skipped | Student found it too easy, skipped exercise. Concepts understood from demo and Q&A. |
 | 9 | Pointer Explorer | exercises/09_pointer_explorer.c | skipped | Skipped exercise. Concepts understood from demo and explanation. |
+| 10 | Pointer Functions | exercises/10_pass_by_exercise.c | skipped | Skipped exercise. Concepts understood from demo. |
 
 ## Mistakes & Weak Areas
 - 2026-03-04: Used global array instead of local — same principle as avoiding globals in JS. Prefer local variables passed to functions.
@@ -90,3 +92,8 @@
 - Covered: Pointers — declaration, &, *, pointer sizes, NULL, pointer arithmetic (stride = sizeof(type)), pointer subtraction, array-pointer equivalence, dangerous patterns (uninitialized, dangling, out-of-bounds)
 - Exercises: "Pointer Explorer" — skipped
 - Key takeaways: Phase 2 begins. Demo showed arithmetic stride (4 bytes per int), byte-distance via char* cast, NULL as 0x0, arr[i] ≡ *(arr+i) ≡ i[arr].
+
+### 2026-03-05 (session 2)
+- Covered: Pass-by-value vs pass-by-pointer — copy trap demo, address proof, swap pattern, out-parameters for multiple returns, array decay recap, stack growth direction
+- Exercises: "Pointer Functions" — skipped
+- Key takeaways: ALL args are copies in C (no references), pass &var to let function modify it, out-parameters for multiple returns (like scanf), arrays always effectively by-pointer.
