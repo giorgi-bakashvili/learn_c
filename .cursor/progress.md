@@ -2,8 +2,8 @@
 
 ## Current Position
 - **Phase**: Phase 2 — Pointers & Memory
-- **Current Topic**: Pass-by-value vs pass-by-pointer
-- **Last Session**: 2026-03-05
+- **Current Topic**: malloc, calloc, realloc, free — heap allocation
+- **Last Session**: 2026-03-23
 
 ## Completed Topics
 | # | Topic | Date | Notes |
@@ -17,6 +17,7 @@
 | 7 | Arrays (stack-allocated, fixed-size) | 2026-03-04 | Declaration, initialization, memory layout, sizeof trick, ARRAY_LEN macro, array decay, passing to functions, 2D row-major. |
 | 8 | Strings as char[] / char* with null terminator | 2026-03-04 | char[] vs char*, null terminator, .rodata segment, strlen vs sizeof, strcmp, snprintf, pointer iteration. Skipped exercise (too easy). |
 | 9 | Pass-by-value vs pass-by-pointer | 2026-03-05 | Copy trap demo, address proof, swap pattern, out-parameters, array decay recap. Skipped exercise. |
+| 10 | malloc, calloc, realloc, free — heap allocation | 2026-03-23 | Stack vs heap memory map, malloc (uninitialized), calloc (zeroed + overflow-safe), realloc (temp pointer pattern), free (NULL-after-free), dynamic array pattern, 5 common heap bugs. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -97,3 +98,8 @@
 - Covered: Pass-by-value vs pass-by-pointer — copy trap demo, address proof, swap pattern, out-parameters for multiple returns, array decay recap, stack growth direction
 - Exercises: "Pointer Functions" — skipped
 - Key takeaways: ALL args are copies in C (no references), pass &var to let function modify it, out-parameters for multiple returns (like scanf), arrays always effectively by-pointer.
+
+### 2026-03-23
+- Covered: Heap allocation — malloc (uninitialized raw bytes), calloc (zeroed + overflow-safe), realloc (resize with temp-pointer pattern), free (NULL-after-free defensive pattern), stack vs heap memory model, dynamic array implementation (JS Array.push internals), 5 common heap bugs (leak, use-after-free, double-free, freeing stack, returning stack pointer)
+- Exercises: none yet — recommended exercise for heap due to 3 skipped exercises in a row
+- Key takeaways: The pointer is on the stack but the data is on the heap. sizeof on a heap pointer gives pointer size, not array size. realloc can move data. Ownership rule: whoever mallocs must free.
