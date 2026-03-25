@@ -1,8 +1,8 @@
 # C Learning Progress
 
 ## Current Position
-- **Phase**: Phase 2 — Pointers & Memory
-- **Current Topic**: Command-line arguments: argc, argv (Phase 2 complete)
+- **Phase**: Phase 3 — Structs & Data Structures
+- **Current Topic**: struct, typedef, nested structs
 - **Last Session**: 2026-03-25
 
 ## Completed Topics
@@ -21,6 +21,7 @@
 | 11 | Pointer to pointer, arrays of pointers | 2026-03-23 | int** basics, modifying caller's pointer (alloc_broken vs alloc_fixed), arrays of pointers, jagged heap 2D arrays, char** string arrays (argv preview), constructor/destructor patterns. |
 | 12 | void* and generic programming patterns | 2026-03-25 | void* basics (implicit casts, can't deref/arith), generic swap with memcpy+size, memcpy/memmove/memset/memcmp, qsort with comparators (overflow trap), generic search (unsigned char* stride trick), void* user_data callback pattern, type safety tradeoffs. |
 | 13 | Command-line arguments: argc, argv | 2026-03-25 | main(int argc, char *argv[]), argv[0]=program name, argv[argc]=NULL, counter vs sentinel loop, atoi footgun vs strtol (endptr+errno), manual option parsing pattern, subcommand dispatch, argv memory layout (contiguous, modifiable unlike string literals), getenv() for environment variables. Phase 2 complete. |
+| 14 | struct, typedef, nested structs | 2026-03-25 | struct declaration, designated initializers, value-semantics copy, padding/alignment (offsetof, field ordering), typedef struct pattern (PascalCase), pass-by-value vs pointer vs const pointer, -> operator, nested struct embedding (flat memory), arrays of structs, heap structs with constructor/destructor pattern, shallow copy trap, self-referential structs (linked list preview). Phase 3 begins. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -121,3 +122,8 @@
 - Covered: Command-line arguments — argc & argv. main(int argc, char *argv[]) signature, argv[0] is program name, argv[argc] is NULL sentinel. atoi vs strtol (footgun vs robust conversion with endptr + errno). Manual option parsing pattern (flags, values, positional args). Subcommand dispatch (git/docker pattern). argv memory layout (contiguous, writable — unlike string literals). getenv() for environment variables.
 - Exercises: none assigned — 5 skipped in a row, challenge exercise strongly recommended
 - Key takeaways: Phase 2 complete. argv is NULL-terminated array of NULL-terminated strings. strtol with endptr is the only safe string-to-number conversion. ptrdiff_t needs stddef.h.
+
+### 2026-03-25 (session 3)
+- Covered: struct, typedef, nested structs — Phase 3 begins. struct declaration and designated initializers, value-semantics copy (unlike JS reference semantics), memory padding/alignment with offsetof proof (field order matters: 12 vs 8 bytes), typedef struct pattern, -> operator (dereference + access), nested struct embedding (flat memory, no indirection), arrays of structs (contiguous, pointer iteration), heap structs with constructor/destructor pattern (cascading free, cascading error handling), shallow copy trap, self-referential structs with struct tag for linked list preview.
+- Exercises: none assigned — 6 skipped in a row, challenge exercise strongly recommended next
+- Key takeaways: Structs are value types (copies, not references). Padding can double struct size — order fields large to small. -> is (*p).field. Nested structs are embedded (flat), not pointed-to. Constructor must unwind on failure.
