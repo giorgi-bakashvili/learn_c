@@ -2,8 +2,8 @@
 
 ## Current Position
 - **Phase**: Phase 2 — Pointers & Memory
-- **Current Topic**: Pointer to pointer, arrays of pointers
-- **Last Session**: 2026-03-23
+- **Current Topic**: Command-line arguments: argc, argv (Phase 2 complete)
+- **Last Session**: 2026-03-25
 
 ## Completed Topics
 | # | Topic | Date | Notes |
@@ -19,6 +19,8 @@
 | 9 | Pass-by-value vs pass-by-pointer | 2026-03-05 | Copy trap demo, address proof, swap pattern, out-parameters, array decay recap. Skipped exercise. |
 | 10 | malloc, calloc, realloc, free — heap allocation | 2026-03-23 | Stack vs heap memory map, malloc (uninitialized), calloc (zeroed + overflow-safe), realloc (temp pointer pattern), free (NULL-after-free), dynamic array pattern, 5 common heap bugs. |
 | 11 | Pointer to pointer, arrays of pointers | 2026-03-23 | int** basics, modifying caller's pointer (alloc_broken vs alloc_fixed), arrays of pointers, jagged heap 2D arrays, char** string arrays (argv preview), constructor/destructor patterns. |
+| 12 | void* and generic programming patterns | 2026-03-25 | void* basics (implicit casts, can't deref/arith), generic swap with memcpy+size, memcpy/memmove/memset/memcmp, qsort with comparators (overflow trap), generic search (unsigned char* stride trick), void* user_data callback pattern, type safety tradeoffs. |
+| 13 | Command-line arguments: argc, argv | 2026-03-25 | main(int argc, char *argv[]), argv[0]=program name, argv[argc]=NULL, counter vs sentinel loop, atoi footgun vs strtol (endptr+errno), manual option parsing pattern, subcommand dispatch, argv memory layout (contiguous, modifiable unlike string literals), getenv() for environment variables. Phase 2 complete. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -109,3 +111,13 @@
 - Covered: Pointer to pointer — int** basics (dereference chain pp→p→x), modifying caller's pointer (alloc_broken vs alloc_fixed), "to modify T pass T*" rule, arrays of pointers (char *[], int *[]), jagged heap 2D arrays (N+1 allocs/frees), char** string array pattern (split_words, argv preview), constructor/destructor patterns (return vs out-parameter vs free-and-NULL)
 - Exercises: none assigned
 - Key takeaways: int** is for letting functions change WHERE a caller's pointer points. Jagged arrays require freeing rows before the pointer array. char** is how argv works.
+
+### 2026-03-25
+- Covered: void* and generic programming — void* as typeless pointer (implicit conversion both ways in C), two restrictions (no deref, no arithmetic), generic swap (memcpy + size parameter replaces <T>), memory trio (memcpy/memmove/memset/memcmp), qsort (canonical generic C, comparator pattern, overflow trap in int compare), generic linear search (unsigned char* for byte arithmetic), void* user_data callback pattern (C's replacement for closures), type safety tradeoffs (compiler can't catch type mismatches through void*)
+- Exercises: none assigned — 4 exercises skipped in a row, exercise recommended next
+- Key takeaways: void* is C's unknown — must cast before use. size_t size parameter replaces generics. unsigned char* for byte-stride arithmetic. user_data is how C does closures.
+
+### 2026-03-25 (session 2)
+- Covered: Command-line arguments — argc & argv. main(int argc, char *argv[]) signature, argv[0] is program name, argv[argc] is NULL sentinel. atoi vs strtol (footgun vs robust conversion with endptr + errno). Manual option parsing pattern (flags, values, positional args). Subcommand dispatch (git/docker pattern). argv memory layout (contiguous, writable — unlike string literals). getenv() for environment variables.
+- Exercises: none assigned — 5 skipped in a row, challenge exercise strongly recommended
+- Key takeaways: Phase 2 complete. argv is NULL-terminated array of NULL-terminated strings. strtol with endptr is the only safe string-to-number conversion. ptrdiff_t needs stddef.h.
