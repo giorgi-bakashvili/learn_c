@@ -2,7 +2,7 @@
 
 ## Current Position
 - **Phase**: Phase 2 — Pointers & Memory
-- **Current Topic**: malloc, calloc, realloc, free — heap allocation
+- **Current Topic**: Pointer to pointer, arrays of pointers
 - **Last Session**: 2026-03-23
 
 ## Completed Topics
@@ -18,6 +18,7 @@
 | 8 | Strings as char[] / char* with null terminator | 2026-03-04 | char[] vs char*, null terminator, .rodata segment, strlen vs sizeof, strcmp, snprintf, pointer iteration. Skipped exercise (too easy). |
 | 9 | Pass-by-value vs pass-by-pointer | 2026-03-05 | Copy trap demo, address proof, swap pattern, out-parameters, array decay recap. Skipped exercise. |
 | 10 | malloc, calloc, realloc, free — heap allocation | 2026-03-23 | Stack vs heap memory map, malloc (uninitialized), calloc (zeroed + overflow-safe), realloc (temp pointer pattern), free (NULL-after-free), dynamic array pattern, 5 common heap bugs. |
+| 11 | Pointer to pointer, arrays of pointers | 2026-03-23 | int** basics, modifying caller's pointer (alloc_broken vs alloc_fixed), arrays of pointers, jagged heap 2D arrays, char** string arrays (argv preview), constructor/destructor patterns. |
 
 ## Exercises
 | # | Exercise | File | Status | Notes |
@@ -103,3 +104,8 @@
 - Covered: Heap allocation — malloc (uninitialized raw bytes), calloc (zeroed + overflow-safe), realloc (resize with temp-pointer pattern), free (NULL-after-free defensive pattern), stack vs heap memory model, dynamic array implementation (JS Array.push internals), 5 common heap bugs (leak, use-after-free, double-free, freeing stack, returning stack pointer)
 - Exercises: none yet — recommended exercise for heap due to 3 skipped exercises in a row
 - Key takeaways: The pointer is on the stack but the data is on the heap. sizeof on a heap pointer gives pointer size, not array size. realloc can move data. Ownership rule: whoever mallocs must free.
+
+### 2026-03-23 (session 2)
+- Covered: Pointer to pointer — int** basics (dereference chain pp→p→x), modifying caller's pointer (alloc_broken vs alloc_fixed), "to modify T pass T*" rule, arrays of pointers (char *[], int *[]), jagged heap 2D arrays (N+1 allocs/frees), char** string array pattern (split_words, argv preview), constructor/destructor patterns (return vs out-parameter vs free-and-NULL)
+- Exercises: none assigned
+- Key takeaways: int** is for letting functions change WHERE a caller's pointer points. Jagged arrays require freeing rows before the pointer array. char** is how argv works.
